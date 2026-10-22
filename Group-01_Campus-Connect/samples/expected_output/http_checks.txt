@@ -1,0 +1,40 @@
+$ curl -i http://127.0.0.1:3000/health
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 161
+Date: Wed, 21 Oct 2026 06:35:01 GMT
+Connection: keep-alive
+
+{"status":"ok","version":"1.0.0","time":"2026-10-21T06:35:01.298Z","uptimeSec":2,"database":"ok","storageWritable":true,"persistentVolume":false,"connections":0}
+
+
+$ curl -i "http://127.0.0.1:3000/socket.io/?EIO=4&transport=polling"
+HTTP/1.1 200 OK
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 116
+cache-control: no-store
+Date: Wed, 21 Oct 2026 06:35:01 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+0{"sid":"rEXVZAjBP_J2YEKOAAAA","upgrades":["websocket"],"pingInterval":10000,"pingTimeout":8000,"maxPayload":100000}
+
+$ curl -i http://127.0.0.1:3000/api/conversations
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json; charset=utf-8
+Content-Length: 27
+Date: Wed, 21 Oct 2026 06:35:01 GMT
+Connection: keep-alive
+
+{"error":"Please sign in."}
+
+
+$ curl -i -X POST -H "Origin: http://evil.example" -H "Content-Type: application/json" -d "{...}" http://127.0.0.1:3000/api/auth/login
+HTTP/1.1 403 Forbidden
+Content-Type: application/json; charset=utf-8
+Content-Length: 28
+Date: Wed, 21 Oct 2026 06:35:01 GMT
+Connection: keep-alive
+
+{"error":"Request blocked."}
+

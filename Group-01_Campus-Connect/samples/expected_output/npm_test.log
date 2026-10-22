@@ -1,0 +1,97 @@
+
+> campus-connect@1.0.0 test
+> node tests/run.js
+
+
+Campus Connect tests (server on port 42753)
+
+Health and protection
+  ok   health endpoint answers ok
+  ok   security headers are set
+  ok   chat API needs a login
+  ok   file download needs a login
+  ok   live channel refuses visitors who are not signed in
+  ok   requests from another website are blocked
+
+Accounts
+  ok   register works
+  ok   session cookie is HttpOnly and SameSite=Lax
+  ok   register again with the same username is refused
+  ok   short password is refused
+  ok   bad username is refused
+  ok   three students registered
+  ok   passwords are not stored as plain text
+  ok   wrong password is refused
+  ok   login works
+  ok   /api/me returns the signed-in student
+
+Live messaging
+  ok   online status shows connected students
+  ok   direct chat created
+  ok   the other student is told about the new chat
+  ok   same pair gets the same chat (no duplicates)
+  ok   message is acknowledged
+  ok   recipient receives it instantly with sender and time
+  ok   unread count is 1 for the recipient
+  ok   marking as read clears the unread count
+  ok   empty message is refused
+  ok   too long message is refused
+  ok   a student outside the chat cannot post in it
+  ok   a student outside the chat cannot read it
+  ok   history is stored and returned
+  ok   group chat created with three members
+  ok   group message reaches every member
+
+File sharing
+  ok   PDF upload accepted
+  ok   recipient is notified live with file name and size
+  ok   recipient can download the same bytes
+  ok   download is sent as an attachment and not sniffed
+  ok   student outside the chat cannot download it
+  ok   file ids that do not exist look the same (404)
+  ok   fake PDF (text renamed .pdf) is rejected
+  ok   program files (.exe) are rejected
+  ok   files over the limit are refused (413)
+  ok   outsider cannot upload into a chat
+  ok   folder tricks in a file name are cleaned
+  ok   files are stored outside the web folder with random names
+  ok   names with accents and other scripts are kept
+  ok   file list shows files shared with the student
+  ok   dashboard totals are right
+
+Search
+  ok   search finds students by name
+  ok   search finds files by name
+  ok   search finds messages
+  ok   search never shows files from other people's chats
+
+Network monitor (real measurements)
+  ok   active connections counted
+  ok   messages counted
+  ok   uploads and bytes counted
+  ok   download counted
+  ok   latency was measured by the server
+  ok   transport types are reported
+  ok   activity log has connections, messages, uploads and downloads
+  ok   monitor pushes live snapshots
+  ok   students see someone go offline
+  ok   disconnect is logged with the reason
+
+Polling fallback and reconnection
+  ok   HTTP long-polling works when WebSocket is not used
+  ok   messages flow over the fallback too
+  ok   a dropped connection reconnects by itself
+
+Restart: saved data survives
+  ok   login still works after restart
+  ok   messages are still there
+  ok   uploaded file is still downloadable and identical
+  ok   existing sign-in still valid after restart
+  ok   logout ends the session
+  ok   private data is refused after logout
+
+Sign-in rate limit
+  ok   too many sign-in attempts get a 429
+
+70 checks passed, 0 failed
+exit 0

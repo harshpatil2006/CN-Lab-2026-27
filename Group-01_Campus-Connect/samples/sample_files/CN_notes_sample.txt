@@ -1,0 +1,4 @@
+Campus Connect sample notes
+
+This small file is used to test file sharing.
+TCP carries the bytes; HTTP carries the upload and the download.

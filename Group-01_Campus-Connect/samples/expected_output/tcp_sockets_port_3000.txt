@@ -1,0 +1,25 @@
+--- sent ---
+GET /socket.io/?EIO=4&transport=websocket HTTP/1.1
+Host: 127.0.0.1:3000
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: Y2FtcHVzY29ubmVjdDAwMQ==
+Sec-WebSocket-Version: 13
+
+--- received ---
+(TCP connected: local 127.0.0.1:41390 -> remote 127.0.0.1:3000)
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: Q7UzCs0xuXibKEFzIXstDE8G03I=
+
+i0{"sid":"2gGjzY0R7MbfU8_xAAAB","upgrades":[],"pingInterval":10000,"pingTimeout":8000,"maxPayload":100000}
+--- TCP sockets involving port 3000 (from /proc/net/tcp) ---
+LISTEN       local 0.0.0.0:3000       remote 0.0.0.0:0
+TIME_WAIT    local 127.0.0.1:3000     remote 127.0.0.1:41382
+ESTABLISHED  local 127.0.0.1:3000     remote 127.0.0.1:41390
+TIME_WAIT    local 127.0.0.1:40570    remote 127.0.0.1:3000
+TIME_WAIT    local 127.0.0.1:40586    remote 127.0.0.1:3000
+TIME_WAIT    local 127.0.0.1:40600    remote 127.0.0.1:3000
+TIME_WAIT    local 127.0.0.1:40604    remote 127.0.0.1:3000
+ESTABLISHED  local 127.0.0.1:41390    remote 127.0.0.1:3000

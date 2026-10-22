@@ -1,0 +1,49 @@
+### A. Valid handshake (16-byte key)
+local port 49944 -> 127.0.0.1:3000
+GET /socket.io/?EIO=4&transport=websocket HTTP/1.1
+Host: 127.0.0.1:3000
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: Y2FtcHVzY29ubmVjdDAwMQ==
+Sec-WebSocket-Version: 13
+--- reply ---
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: Q7UzCs0xuXibKEFzIXstDE8G03I=
+
+i0{"sid":"y0LHMPteMYtzlcnxAAAB","upgrades":[],"pingInterval":10000,"pingTimeout":8000,"maxPayload":100000}
+
+### B. Invalid key (17 bytes)
+local port undefined -> 127.0.0.1:3000
+GET /socket.io/?EIO=4&transport=websocket HTTP/1.1
+Host: 127.0.0.1:3000
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: Y2FtcHVzY29ubmVjdDAwMDE=
+Sec-WebSocket-Version: 13
+--- reply ---
+HTTP/1.1 400 Bad Request
+Connection: close
+Content-Type: text/html
+Content-Length: 43
+
+Missing or invalid Sec-WebSocket-Key header
+
+### C. Handshake from another website (Origin: http://evil.example)
+local port undefined -> 127.0.0.1:3000
+GET /socket.io/?EIO=4&transport=websocket HTTP/1.1
+Host: 127.0.0.1:3000
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: Y2FtcHVzY29ubmVjdDAwMQ==
+Sec-WebSocket-Version: 13
+Origin: http://evil.example
+--- reply ---
+HTTP/1.1 400 Bad Request
+Connection: close
+Content-type: text/html
+Content-Length: 9
+
+Forbidden
+
