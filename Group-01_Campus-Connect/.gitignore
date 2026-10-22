@@ -1,0 +1,11 @@
+node_modules/
+data/
+.env
+.env.*
+!.env.example
+*.log
+!samples/expected_output/*.log
+.railway/
+.DS_Store
+campus-connect.zip
+LIVE_URL.txt
